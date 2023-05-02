@@ -1,0 +1,18 @@
+server:
+  port: 8001
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/line_bot
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+
+  flyway:
+    url: jdbc:postgresql://localhost:5434/line_bot
+    user: postgres
+    password: postgres
