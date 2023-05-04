@@ -1,0 +1,7 @@
+logging:
+  pattern:
+    console: "%date %t %green(%p) [%cyan(%C.%M):%magenta(%L)] : %msg%n"
+  level:
+    root: INFO
+    com.scott.sideproject.linebotbackend.web.controller: DEBUG
+

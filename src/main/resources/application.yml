@@ -2,8 +2,11 @@ server:
   port: 8001
 
 spring:
+  config:
+    import: classpath:logging.yml
+
   datasource:
-    url: jdbc:postgresql://localhost:5434/line_bot
+    url: jdbc:postgresql://localhost:5433/line_bot
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -13,6 +16,6 @@ spring:
     database: postgresql
 
   flyway:
-    url: jdbc:postgresql://localhost:5434/line_bot
+    url: jdbc:postgresql://localhost:5433/line_bot
     user: postgres
     password: postgres
