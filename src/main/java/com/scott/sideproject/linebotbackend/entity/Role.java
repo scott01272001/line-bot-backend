@@ -1,5 +1,6 @@
 package com.scott.sideproject.linebotbackend.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +23,10 @@ import java.util.UUID;
 @Builder
 @Data
 public class Role {
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Id
-    @ManyToOne
-    @JoinColumn(name = )
+    private Long id;
+
+    @Column
     private String name;
 }

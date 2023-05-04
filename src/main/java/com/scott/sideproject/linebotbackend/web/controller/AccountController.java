@@ -4,6 +4,7 @@ import com.scott.sideproject.linebotbackend.entity.Account;
 import com.scott.sideproject.linebotbackend.repository.AccountRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,9 +17,10 @@ public class AccountController {
 
     private final AccountRepository accountRepository;
 
-    @GetMapping
+    @GetMapping()
     public List<Account> getAccounts() {
         return accountRepository.findAll();
     }
+
 
 }
