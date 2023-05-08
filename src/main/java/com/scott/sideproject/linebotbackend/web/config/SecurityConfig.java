@@ -19,7 +19,13 @@ import org.springframework.security.core.userdetails.cache.SpringCacheBasedUserC
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.registration.ClientRegistration;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.client.registration.ClientRegistrations;
+import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
+import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Collection;
 
@@ -33,10 +39,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+        http.oauth2Client().clientRegistrationRepository(clientRegistrationRepository());
+       // http.oauth2Login();
+
         http.authorizeHttpRequests().anyRequest().authenticated().and().httpBasic()
             .and().passwordManagement(Customizer.withDefaults());
 
         http.cors().disable().csrf().disable();
+
+//        http.addFilterBefore(new OAuth2AuthorizationRequestRedirectFilter(clientRegistrationRepository()),
+//                UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -58,6 +70,22 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+
+    @Bean
+    public ClientRegistrationRepository clientRegistrationRepository() {
+        ClientRegistration client = ClientRegistrations
+                .fromOidcIssuerLocation("https://accounts.google.com")
+                .clientId("414401882069-mg039gt48slvbgn0migcf366itht8d62.apps.googleusercontent.com")
+                .clientSecret("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")
+                .redirectUri("http://localhost")
+                .scope("openid", "profile", "email")
+                .registrationId("google")
+                .build();
+
+        ClientRegistrationRepository clientRegistrationRepository = new InMemoryClientRegistrationRepository(client);
+        return clientRegistrationRepository;
     }
 
 }
