@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:15.3-alpine
+    restart: on-failure
+    environment:
+      POSTGRES_DB: line_bot
+      POSTGRES_USER: line_bot
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+volumes:
+  db-data:

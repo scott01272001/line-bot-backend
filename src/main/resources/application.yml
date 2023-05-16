@@ -6,9 +6,9 @@ spring:
     import: classpath:logging.yml
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/line_bot
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://localhost:5434/line_bot
+    username: line_bot
+    password: password
     driver-class-name: org.postgresql.Driver
 
   jpa:
