@@ -19,3 +19,12 @@ spring:
     url: jdbc:postgresql://localhost:5435/line_bot
     user: line_bot
     password: password
+
+
+app:
+  security:
+    jwt:
+      secret-key: lYMgGB+/aQyrS5i59Q9FaB25i6UH0so24WoOz52Ickg=
+      expiration: 86400000 # a day
+      refresh-token:
+          expiration: 604800000 # 7 days
